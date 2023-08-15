@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recettes - Les Petits Plats</title>
+  <!-- Link to Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+   <link rel="stylesheet" href="asset/style.css">
+ 
+</head>
+<body>
+  <div class="header">
+    <div class="header-logo">
+      LES PETIT PLAT <i class="fa fa-circle"></i>
+    </div>
+    <div class="container">
+      <div class="header-text">
+        CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN, SIMPLES ET DELICIEUSES.
+      </div>
+      <div class="search-container">
+        <input class="search-input" type="text" placeholder="Rechercher une recette, un ingrédient, ...">
+        <button class="search-button"><i class="fas fa-search"></i></button>
+      </div>
+	   <aside>
+        <div class="container_selected"  id="container_selected">
+            <div id="selected__tag"></div>
+        </div>
+    </aside>
+    </div>
+  </div>
+  
+  <div class="container">
+    <div class="select-container">
+      <div class="form-group">
+        <select class="form-control">
+		<option>Ingrédient</option>
+          <option>Option 1</option>
+          <option>Option 2</option>
+          <option>Option 3</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <select class="form-control">
+		<option >Appareils</option>
+          <option>Option 1</option>
+          <option>Option 2</option>
+          <option>Option 3</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <select class="form-control">
+		<option >Ustensiles</option>
+          <option>Option 1</option>
+          <option>Option 2</option>
+          <option>Option 3</option>
+        </select>
+      </div>
+      <div class="recette-count">
+        1500 recettes
+      </div>
+    </div>
+    <div class="row" id="recipeCardContainer">
+      <!-- Les cartes de recettes seront ajoutées ici -->
+    </div>
+
+  </div>
+
+  <!-- Link to Bootstrap JS and jQuery -->
+  <script src="js/index.js" type="module"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

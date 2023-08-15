@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test JSON</title>
+</head>
+<body>
+  <!-- Votre contenu HTML ici -->
+
+  <script>
+    // Charger le fichier JSON
+    fetch('../../data/recipes.json')
+      .then(response => response.json())
+      .then(data => {
+        console.log('Contenu du JSON :', data);
+      })
+  </script>
+</body>
+</html>
+// Récupérer les données JSON à partir du fichier recipes.json
+fetch('../../data/recipes.json')
+  .then(response => response.json())
+  .then(data => {
+    // Accéder au tableau de recettes à l'intérieur de la propriété "recipes"
+    const recipes = data.recipes;
+
+    // Générer les cartes de recettes et les ajouter à l'élément container
+    recipes.forEach(recipe => {
+      const recipeCard = generateRecipeCard(recipe);
+      recipeContainer.innerHTML += recipeCard;
+    });
+  })
+  .catch(error => {
+    console.error('Une erreur s\'est produite lors de la récupération des données JSON :', error);
+  });
+
+  

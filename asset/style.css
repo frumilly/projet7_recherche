@@ -1,0 +1,126 @@
+
+   body {
+     margin-right: 150px;
+     margin-left: 150px;
+   }
+   .header {
+     position: relative;
+     background: url('images/cover.png') center/cover;
+     color: white;
+     text-align: center;
+    padding: 220px 0; 
+     height: auto;
+     background-color: rgba(0, 0, 0, 2);
+   }
+   .header-logo {
+     position: absolute;
+     top: 0;
+     left: 0;
+     margin: 20px;
+     font-size: 24px;
+     color: white;
+   }
+   .header-text {
+     color: rgb(240,230,140);
+     font-size: 45px;
+     font-weight: bolder;
+   }
+   .search-container {
+     background-color: white;
+     border-radius: 20px;
+     padding: 10px;
+     display: flex;
+     align-items: center;
+   }
+   .search-input {
+     flex: 1;
+     border: none;
+     padding: 10px;
+   }
+   .search-button {
+     background-color: black;
+     color: white;
+     border: none;
+     border-radius: 20px;
+     padding: 10px 20px;
+     cursor: pointer;
+   }
+   .select-container {
+     display: flex;
+     align-items: center;
+     margin: 10px 0;
+   }
+   .form-group {
+     margin-right: 10px; /* Ajuster la marge interne des sélecteurs */
+   }
+   .recette-count {
+     font-weight: bold;
+     font-size: 18px;
+     color: #2d2d2d;
+     margin-left: auto; /* Déplacer la div à tout à droite */
+   }
+   .recipe-card {
+     border: 1px solid #ddd;
+     border-radius: 10px;
+    
+     margin-bottom: 20px;
+   }
+   .img-fluid{
+   border-top-left-radius: 10px;
+   border-top-right-radius: 10px;
+   }
+   .recipe-card h3{
+   margin:20px;
+   font-size:20px;
+   font-weight: bold;	
+   }
+   .recipe-card p{
+   margin:20px;
+   font-size:15px;
+   color: gray;
+   }
+   .description_recette{
+   margin:20px;
+   }
+   ul {
+ list-style-type: none;
+padding:20px;
+font-size:15px;
+}
+.ingredient{
+padding:20px;}
+.quantity{padding:20px;}
+.col1{
+color:gray;
+}
+ul.no-indent {
+ padding-left: 0;
+}
+
+ul {
+ margin-bottom: -15px; 
+ 
+}
+.titre_ing{
+font-weight: bold;	
+}
+.time-badge {
+ position: absolute;
+ top: 10px;
+ right: 25px;
+ background-color: khaki;
+ border-radius: 5px;
+ padding: 5px 10px;
+ font-size: 12px;
+}
+
+.description_recette {
+  max-height: 6em; /*  hauteur à environ 4 lignes */
+  overflow: hidden;
+  white-space: normal; 
+}
+.recipe-card img {
+  width: 348px;
+  height: 348px;
+  object-fit: cover;
+}
