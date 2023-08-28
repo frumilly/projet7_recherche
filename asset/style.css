@@ -145,8 +145,14 @@ font-weight: bold;
   white-space: nowrap;
 }
 
-.tag::before {
+/* .tag::before {
   content: 'x';
   margin-right: 5px;
   font-weight: bold;
+} */
+.error-message {
+  color: red;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 10px;
 }

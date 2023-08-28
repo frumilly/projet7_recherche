@@ -5,54 +5,19 @@
 
 import * as Search from './lib/search.js';
 import * as Display from './lib/view.js';
-import { recipes } from '../data/recipes.js'; 
+import { recipes } from '../data/recipes.js';
 
 // index.js
 let searchValue = "";
 let tags = [];
-  // Déclarez et initialisez les sélecteurs 
-  const ingredientSelect = document.querySelector('.ingredient-select');
-  const appareilSelect = document.querySelector('.appareil-select');
-  const ustensileSelect = document.querySelector('.ustensile-select');
-function getFilteredIngredients(recipes) {
-    const allIngredients = recipes.flatMap(recipe => recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase()));
-    const uniqueIngredients = Array.from(new Set(allIngredients));  
-    return uniqueIngredients;
-}
+const ingredientSelect = document.querySelector('.ingredient-select');
+const appareilSelect = document.querySelector('.appareil-select');
+const ustensileSelect = document.querySelector('.ustensile-select');
 
-function getFilteredAppareils(recipes) {
-    const allAppareils = recipes.map(recipe => recipe.appliance.toLowerCase());
-    const uniqueAppareils = Array.from(new Set(allAppareils));
-    return uniqueAppareils;
-}
 
-function getFilteredUstensiles(recipes) {
-    const allUstensiles = recipes.flatMap(recipe => recipe.ustensils.map(ustensile => ustensile.toLowerCase()));
-    const uniqueUstensiles = Array.from(new Set(allUstensiles));
-    return uniqueUstensiles;
-}
-function updateSelectOptions(selectElement, title, options) {
-    // Supprimer toutes les options existantes de la selectbox
-    selectElement.innerHTML = '';
-
-    // Ajouter le titre
-    const titleOption = document.createElement('option');
-    titleOption.textContent = title;
-    titleOption.disabled = true;
-    selectElement.appendChild(titleOption);
-
-    // Ajouter les nouvelles options à la selectbox
-    options.forEach(option => {
-        const optionElement = document.createElement('option');
-        optionElement.textContent = option;
-        selectElement.appendChild(optionElement);
-    });
-    selectElement.selectedIndex = 0;
-}
 function updateTags() {
     const selectedTagsContainer = document.getElementById('selected__tag');
     selectedTagsContainer.innerHTML = '';
-console.log(tags);
     tags.forEach(tag => {
         const tagElement = document.createElement('div');
         tagElement.classList.add('tag');
@@ -60,87 +25,94 @@ console.log(tags);
         selectedTagsContainer.appendChild(tagElement);
     });
 }
-// Fonction pour filtrer et afficher les recettes en fonction des tags sélectionnés
-function filterAndDisplayRecipes() {
-    const filterRecipes = Search.filter(recipes, searchValue, tags);
-    Display.displayRecipes(filterRecipes, recipeCardContainer);
-    
-    // Mettre à jour le compteur de recettes
-    const recetteCountElement = document.querySelector('.recette-count');
-    recetteCountElement.textContent = `${filterRecipes.length} recettes`;
 
-    // Mettre à jour les selectbox avec les options filtrées
-    updateSelectOptions(ingredientSelect, 'Ingrédient', getFilteredIngredients(filterRecipes));
-    updateSelectOptions(appareilSelect, 'Appareils', getFilteredAppareils(filterRecipes));
-    updateSelectOptions(ustensileSelect, 'Ustensiles', getFilteredUstensiles(filterRecipes));
-}
-
-function init(){
-    let searchValue="";
-    //let tags=[];
+function init() {
+    let searchValue = "";
     const filterRecipes = Search.filter(recipes, searchValue, tags);
     const searchInput = document.querySelector('.search-input');
     const recipeCardContainer = document.getElementById('recipeCardContainer');
     const recetteCountElement = document.querySelector('.recette-count');
-      
-        updateSelectOptions(ingredientSelect, 'Ingrédient', getFilteredIngredients(recipes));
-        updateSelectOptions(appareilSelect, 'Appareils', getFilteredAppareils(recipes));
-        updateSelectOptions(ustensileSelect, 'Ustensiles', getFilteredUstensiles(recipes));
-    
-    recetteCountElement.textContent = `${recipes.length} recettes`;
+    Display.majSelect(recipes);
+
+
+    recetteCountElement.textContent = `${recipes.length} recette(s)`;
     searchInput.addEventListener('input', (event) => {
-        searchValue = event.target.value.trim(); 
+        searchValue = event.target.value.trim();
         if (searchValue.length >= 3) {
             const filterRecipes = Search.filter(recipes, searchValue, tags);
             Display.displayRecipes(filterRecipes, recipeCardContainer);
-             // Mettre à jour le compteur de recettes
-        const recetteCountElement = document.querySelector('.recette-count');
-        recetteCountElement.textContent = `${filterRecipes.length} recettes`;
-         // Mettre à jour les selectbox
-        
-         updateSelectOptions(ingredientSelect, 'Ingrédient', getFilteredIngredients(filterRecipes));
-         updateSelectOptions(appareilSelect, 'Appareils', getFilteredAppareils(filterRecipes));
-         updateSelectOptions(ustensileSelect, 'Ustensiles', getFilteredUstensiles(filterRecipes));
+            // Mettre à jour le compteur de recettes
+            const recetteCountElement = document.querySelector('.recette-count');
+            recetteCountElement.textContent = `${filterRecipes.length} recette(s)`;
+            // Mettre à jour les selectbox
+
+            Display.majSelect(filterRecipes);
         }
         else if (searchValue.length === 0) { // Si la recherche est vide
-            Display.displayRecipes(recipes, recipeCardContainer);
-            recetteCountElement.textContent = `${recipes.length} recettes`;
-            // Réinitialiser les selectbox avec toutes les options
-            updateSelectOptions(ingredientSelect, 'Ingrédient', getFilteredIngredients(recipes));
-            updateSelectOptions(appareilSelect, 'Appareils', getFilteredAppareils(recipes));
-            updateSelectOptions(ustensileSelect, 'Ustensiles', getFilteredUstensiles(recipes));
+            const filterRecipes = Search.filter(recipes, searchValue, tags);
+            console.log(filterRecipes);
+            Display.displayRecipes(filterRecipes, recipeCardContainer);
+            recetteCountElement.textContent = `${filterRecipes.length} recette(s)`;
+            Display.majSelect(filterRecipes);
         }
     });
     Display.displayRecipes(filterRecipes);
-   //console.log(recipes , filterRecipes);
-   ingredientSelect.addEventListener('change', (event) => {
-    const selectedIngredient = event.target.value;
-    if (selectedIngredient !== 'Ingrédient') {
-        tags.push(selectedIngredient);
-        updateTags();
-        console.log(selectedIngredient);
-       // filterAndDisplayRecipes();
-    }
-});
+    //console.log(recipes , filterRecipes);
+    ingredientSelect.addEventListener('change', (event) => {
+        const selectedIngredient = event.target.value;
+        if (selectedIngredient !== 'Ingrédient') {
+            tags.push(selectedIngredient);
+            updateTags();
+            // Supprimer l'élément sélectionné de la liste des options de ingredientSelect
+            const filterRecipes = Search.filter(recipes, searchValue, tags);
+            Display.displayRecipes(filterRecipes, recipeCardContainer);
+            // Mettre à jour le compteur de recettes
+            const recetteCountElement = document.querySelector('.recette-count');
+            recetteCountElement.textContent = `${filterRecipes.length} recette(s)`;
+            // Mettre à jour les selectbox
+            const selectedIngredientOption = ingredientSelect.querySelector('option:checked');
+            const selectedIngredient2 = selectedIngredientOption.value;
+            Display.majSelect2(filterRecipes, selectedIngredient2);
 
-appareilSelect.addEventListener('change', (event) => {
-    const selectedAppareil = event.target.value;
-    if (selectedAppareil !== 'Appareils') {
-        tags.push(selectedAppareil);
-        console.log(selectedAppareil);
-        updateTags();
-        //filterAndDisplayRecipes();
-    }
-});
 
-ustensileSelect.addEventListener('change', (event) => {
-    const selectedUstensile = event.target.value;
-    if (selectedUstensile !== 'Ustensiles') {
-        tags.push(selectedUstensile);
-        updateTags();
-        //filterAndDisplayRecipes();
-    }
-});
+
+        }
+    });
+
+    appareilSelect.addEventListener('change', (event) => {
+        const selectedAppareil = event.target.value;
+        if (selectedAppareil !== 'Appareils') {
+            tags.push(selectedAppareil);
+            updateTags();
+            const filterRecipes = Search.filter(recipes, searchValue, tags);
+            Display.displayRecipes(filterRecipes, recipeCardContainer);
+            // Mettre à jour le compteur de recettes
+            const recetteCountElement = document.querySelector('.recette-count');
+            recetteCountElement.textContent = `${filterRecipes.length} recette(s)`;
+            // Mettre à jour les selectbox
+            const selectedAppareilOption = appareilSelect.querySelector('option:checked');
+            const appareil = selectedAppareilOption.value;
+            Display.majSelect2(filterRecipes, appareil);
+
+        }
+    });
+
+    ustensileSelect.addEventListener('change', (event) => {
+        const selectedUstensile = event.target.value;
+        if (selectedUstensile !== 'Ustensiles') {
+            tags.push(selectedUstensile);
+            updateTags();
+            const filterRecipes = Search.filter(recipes, searchValue, tags);
+            Display.displayRecipes(filterRecipes, recipeCardContainer);
+            // Mettre à jour le compteur de recettes
+            const recetteCountElement = document.querySelector('.recette-count');
+            recetteCountElement.textContent = `${filterRecipes.length} recette(s)`;
+            // Mettre à jour les selectbox
+            const selectedUstensileOption = ustensileSelect.querySelector('option:checked');
+            const ustensil = selectedUstensileOption.value;
+            Display.majSelect2(filterRecipes, ustensil);
+        }
+    });
 }
 
 init();

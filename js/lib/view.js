@@ -1,5 +1,13 @@
 // faire l'affichage 
 // Fonction pour générer le code HTML d'une carte de recette
+  // Déclarez et initialisez les sélecteurs 
+  const ingredientSelect = document.querySelector('.ingredient-select');
+  const appareilSelect = document.querySelector('.appareil-select');
+  const ustensileSelect = document.querySelector('.ustensile-select');
+  function sortAlphabetically(arr) {
+    return arr.map(item => item.charAt(0).toUpperCase() + item.slice(1)) // Capitaliser la première lettre
+              .sort((a, b) => a.localeCompare(b));
+}
 function generateRecipeCard(recipe) {
   const ingredients = recipe.ingredients;
   const ingredientsCount = ingredients.length;
@@ -46,11 +54,56 @@ function generateRecipeCard(recipe) {
     `;
 }
 
+ // affichage des selctbox mise à jour --> view.js
+ function getFilteredIngredients(recipes) {
+  const allIngredients = recipes.flatMap(recipe => recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase()));
+  const uniqueIngredients = Array.from(new Set(allIngredients));  
+  return uniqueIngredients;
+}
 
+function getFilteredAppareils(recipes) {
+  const allAppareils = recipes.map(recipe => recipe.appliance.toLowerCase());
+  const uniqueAppareils = Array.from(new Set(allAppareils));
+  return uniqueAppareils;
+}
+
+function getFilteredUstensiles(recipes) {
+  const allUstensiles = recipes.flatMap(recipe => recipe.ustensils.map(ustensile => ustensile.toLowerCase()));
+  const uniqueUstensiles = Array.from(new Set(allUstensiles));
+  return uniqueUstensiles;
+}
+//fin affichage
+
+function updateSelectOptions(selectElement, title, options,selectedElmt) {
+  // Supprimer toutes les options existantes de la selectbox
+  selectElement.innerHTML = '';
+
+  // Ajouter le titre
+  const titleOption = document.createElement('option');
+  titleOption.textContent = title;
+  titleOption.disabled = true;
+  selectElement.appendChild(titleOption);
+
+  // Ajouter les nouvelles options à la selectbox
+  options.forEach(option => {
+    if (option != selectedElmt){
+      const optionElement = document.createElement('option');
+      optionElement.textContent = option;
+      selectElement.appendChild(optionElement);
+    
+  }
+  });
+  selectElement.selectedIndex = 0;
+}
 
 export function displayRecipes(recipes) {
   // Récupérer l'élément de la page où vous voulez afficher les cartes en utilisant l'ID
   const recipeContainer = document.getElementById('recipeCardContainer');
+    // Si aucune recette n'est trouvée, afficher le message d'erreur
+    if (recipes.length === 0) {
+      recipeContainer.innerHTML = '<div class="error-message">Aucune recette trouvée.</div>';
+      return;
+    }
   let allRecipes="";
   // Générer les cartes de recettes et les ajouter à l'élément container
   recipes.forEach(recipe => {
@@ -61,8 +114,26 @@ export function displayRecipes(recipes) {
   });
   recipeContainer.innerHTML = allRecipes;
 }
+export function majSelect(recipes){
+  updateSelectOptions(ingredientSelect, 'Ingrédient', sortAlphabetically(getFilteredIngredients(recipes)));
+    updateSelectOptions(appareilSelect, 'Appareils', sortAlphabetically(getFilteredAppareils(recipes)));
+    updateSelectOptions(ustensileSelect, 'Ustensiles', sortAlphabetically(getFilteredUstensiles(recipes)));
+}
+export function majSelect2(recipes, removedIngredient) {
+ 
+  const filteredIngredients = sortAlphabetically(getFilteredIngredients(recipes));
+  const filteredAppareils = sortAlphabetically(getFilteredAppareils(recipes));
+  const filteredUstensiles = sortAlphabetically(getFilteredUstensiles(recipes));
+  
+  updateSelectOptions(ingredientSelect, 'Ingrédient', filteredIngredients,removedIngredient);
+ updateSelectOptions(appareilSelect, 'Appareils', filteredAppareils,removedIngredient);
+  updateSelectOptions(ustensileSelect, 'Ustensiles', filteredUstensiles,removedIngredient);
+}
 
 export default
 {
-  displayRecipes
+  displayRecipes,
+  majSelect,
+  majSelect2
+
 };
