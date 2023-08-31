@@ -99,9 +99,18 @@ function updateSelectOptions(selectElement, title, options,selectedElmt) {
 export function displayRecipes(recipes) {
   // Récupérer l'élément de la page où vous voulez afficher les cartes en utilisant l'ID
   const recipeContainer = document.getElementById('recipeCardContainer');
+  const searchInput = document.querySelector('.search-input');
+  let searchValue = searchInput.value.trim();
     // Si aucune recette n'est trouvée, afficher le message d'erreur
+    // Aucune recette ne contient ‘XXX ’ vous pouvez chercher «tarte aux pommes », « poisson », etc.
     if (recipes.length === 0) {
+      if (searchValue.length >= 3) {
+        var errorMessage = "Aucune recette ne contient ‘" + searchValue + "’. Vous pouvez chercher «tarte aux pommes», «poisson», etc.";
+        recipeContainer.innerHTML = '<div class="error-message">' + errorMessage + '</div>';
+    } else {
       recipeContainer.innerHTML = '<div class="error-message">Aucune recette trouvée.</div>';
+    }
+     
       return;
     }
   let allRecipes="";
