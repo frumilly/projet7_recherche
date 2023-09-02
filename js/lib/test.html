@@ -3,36 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test JSON</title>
+  <title>Tags Alignment Test</title>
+  <style>
+    .tags-container {
+      display: flex;
+      flex-wrap: nowrap; /* Empêche les éléments de passer à la ligne */
+      margin-top: 10px;
+    }
+
+    .tag {
+      background-color: #ffc107;
+      border-radius: 20px;
+      padding: 5px 10px;
+      margin: 5px;
+      font-size: 14px;
+      color: #333;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    .tag::before {
+      content: 'x';
+      margin-right: 5px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-  <!-- Votre contenu HTML ici -->
 
-  <script>
-    // Charger le fichier JSON
-    fetch('../../data/recipes.json')
-      .then(response => response.json())
-      .then(data => {
-        console.log('Contenu du JSON :', data);
-      })
-  </script>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tags-container" id="selected__tag">
+        <!-- Les tags seront ajoutés ici -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<button onclick="updateTags()">Ajouter un Tag</button>
+
+<script>
+  const tags = ['Tag 1', 'Tag 2', 'Tag 3']; // Exemple de tags
+
+  function updateTags() {
+    const selectedTagsContainer = document.getElementById('selected__tag');
+    tags.forEach(tag => {
+      const tagElement = document.createElement('div');
+      tagElement.classList.add('tag');
+      tagElement.textContent = tag;
+      selectedTagsContainer.appendChild(tagElement);
+    });
+  }
+</script>
+
 </body>
 </html>
-// Récupérer les données JSON à partir du fichier recipes.json
-fetch('../../data/recipes.json')
-  .then(response => response.json())
-  .then(data => {
-    // Accéder au tableau de recettes à l'intérieur de la propriété "recipes"
-    const recipes = data.recipes;
-
-    // Générer les cartes de recettes et les ajouter à l'élément container
-    recipes.forEach(recipe => {
-      const recipeCard = generateRecipeCard(recipe);
-      recipeContainer.innerHTML += recipeCard;
-    });
-  })
-  .catch(error => {
-    console.error('Une erreur s\'est produite lors de la récupération des données JSON :', error);
-  });
-
-  

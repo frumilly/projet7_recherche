@@ -74,7 +74,7 @@ function getFilteredUstensiles(recipes) {
 }
 //fin affichage
 
-function updateSelectOptions(selectElement, title, options,selectedElmt) {
+function updateSelectOptions(selectElement, title, options,tags) {
   // Supprimer toutes les options existantes de la selectbox
   selectElement.innerHTML = '';
 
@@ -86,7 +86,7 @@ function updateSelectOptions(selectElement, title, options,selectedElmt) {
 
   // Ajouter les nouvelles options à la selectbox
   options.forEach(option => {
-    if (option != selectedElmt){
+    if (!tags.includes(option)) {
       const optionElement = document.createElement('option');
       optionElement.textContent = option;
       selectElement.appendChild(optionElement);
@@ -123,12 +123,8 @@ export function displayRecipes(recipes) {
   });
   recipeContainer.innerHTML = allRecipes;
 }
-export function majSelect(recipes){
-  updateSelectOptions(ingredientSelect, 'Ingrédient', sortAlphabetically(getFilteredIngredients(recipes)));
-    updateSelectOptions(appareilSelect, 'Appareils', sortAlphabetically(getFilteredAppareils(recipes)));
-    updateSelectOptions(ustensileSelect, 'Ustensiles', sortAlphabetically(getFilteredUstensiles(recipes)));
-}
-export function majSelect2(recipes, removedIngredient) {
+
+export function majSelect(recipes, removedIngredient) {
  
   const filteredIngredients = sortAlphabetically(getFilteredIngredients(recipes));
   const filteredAppareils = sortAlphabetically(getFilteredAppareils(recipes));
@@ -142,7 +138,6 @@ export function majSelect2(recipes, removedIngredient) {
 export default
 {
   displayRecipes,
-  majSelect,
-  majSelect2
+  majSelect
 
 };

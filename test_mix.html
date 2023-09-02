@@ -61,12 +61,46 @@
     </div>
    
       <div class="col-md-12">
-      <div class="tags-container"  id="selected__tag">
+      <div class="tags-container"  id="container_selected">
         
       </div>
       </div>
  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tags-container">
+          <div id="selected__tag2"></div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tags-container" id="selected__tag">
+          <!-- Les tags seront ajoutés ici -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <button onclick="updateTags2()">Ajouter un Tag</button>
 
+<script>
+  const tags = ['Tag 1', 'Tag 2', 'Tag 3']; // Exemple de tags
+
+  function updateTags2() {
+    const selectedTagsContainer = document.getElementById('selected__tag');
+    tags.forEach(tag => {
+      const tagElement = document.createElement('div');
+      tagElement.classList.add('tag');
+      tagElement.textContent = tag;
+      selectedTagsContainer.appendChild(tagElement);
+    });
+  }
+</script>
     <div class="row" id="recipeCardContainer">
       <!-- Les cartes de recettes seront ajoutées ici -->
     </div>
