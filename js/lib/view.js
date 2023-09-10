@@ -8,6 +8,11 @@
     return arr.map(item => item.charAt(0).toUpperCase() + item.slice(1)) // Capitaliser la première lettre
               .sort((a, b) => a.localeCompare(b));
 }
+function escapeUserInput(input) {
+  // Échappez les caractères spéciaux en utilisant des expressions régulières
+  return input.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 function generateRecipeCard(recipe) {
   const ingredients = recipe.ingredients;
   const ingredientsCount = ingredients.length;
@@ -74,27 +79,7 @@ function getFilteredUstensiles(recipes) {
 }
 //fin affichage
 
-function updateSelectOptions(selectElement, title, options,tags) {
-  // Supprimer toutes les options existantes de la selectbox
-  selectElement.innerHTML = '';
 
-  // Ajouter le titre
-  const titleOption = document.createElement('option');
-  titleOption.textContent = title;
-  titleOption.disabled = true;
-  selectElement.appendChild(titleOption);
-
-  // Ajouter les nouvelles options à la selectbox
-  options.forEach(option => {
-    if (!tags.includes(option)) {
-      const optionElement = document.createElement('option');
-      optionElement.textContent = option;
-      selectElement.appendChild(optionElement);
-    
-  }
-  });
-  selectElement.selectedIndex = 0;
-}
 
 export function displayRecipes(recipes) {
   // Récupérer l'élément de la page où vous voulez afficher les cartes en utilisant l'ID
@@ -105,6 +90,7 @@ export function displayRecipes(recipes) {
     // Aucune recette ne contient ‘XXX ’ vous pouvez chercher «tarte aux pommes », « poisson », etc.
     if (recipes.length === 0) {
       if (searchValue.length >= 3) {
+        searchValue=escapeUserInput(searchValue);
         var errorMessage = "Aucune recette ne contient ‘" + searchValue + "’. Vous pouvez chercher «tarte aux pommes», «poisson», etc.";
         recipeContainer.innerHTML = '<div class="error-message">' + errorMessage + '</div>';
     } else {
@@ -123,16 +109,40 @@ export function displayRecipes(recipes) {
   });
   recipeContainer.innerHTML = allRecipes;
 }
+function updateSelectOptions(ulElement, options, tags) {
+  // Supprimer tous les éléments <li> existants de la liste
+  ulElement.innerHTML = '';
 
+  // Ajouter les nouveaux éléments <li> à la liste
+  options.forEach(option => {
+    // Vérifier si l'option n'est pas déjà dans les tags sélectionnés
+    if (!tags.includes(option)) {
+      const liElement = document.createElement('li');
+      liElement.className = 'list-group-item';
+      liElement.textContent = option;
+      liElement.style.cursor = 'pointer';
+      // Ajouter un gestionnaire d'événements pour la sélection de l'élément
+     // liElement.addEventListener('click', function() {
+        // Votre logique de sélection d'élément ici
+        // Par exemple, vous pouvez appeler une fonction pour gérer la sélection
+        //console.log("non");
+      //});
+
+      ulElement.appendChild(liElement);
+    }
+  });
+}
 export function majSelect(recipes, removedIngredient) {
  
   const filteredIngredients = sortAlphabetically(getFilteredIngredients(recipes));
   const filteredAppareils = sortAlphabetically(getFilteredAppareils(recipes));
   const filteredUstensiles = sortAlphabetically(getFilteredUstensiles(recipes));
-  
-  updateSelectOptions(ingredientSelect, 'Ingrédient', filteredIngredients,removedIngredient);
- updateSelectOptions(appareilSelect, 'Appareils', filteredAppareils,removedIngredient);
-  updateSelectOptions(ustensileSelect, 'Ustensiles', filteredUstensiles,removedIngredient);
+  const ingredientList = document.querySelector('#ingredientDropdownList');
+  const appareilList = document.querySelector('#appareilDropdownList');
+  const ustensileList = document.querySelector('#ustensileDropdownList');
+  updateSelectOptions(ingredientList, filteredIngredients,removedIngredient);
+  updateSelectOptions(appareilList, filteredAppareils,removedIngredient);
+  updateSelectOptions(ustensileList, filteredUstensiles,removedIngredient);
 }
 
 export default

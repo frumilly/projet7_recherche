@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recettes - Les Petits Plats</title>
-  <!-- Link to Bootstrap CSS -->
-  <link rel="icon" type="image/png" href="asset/images/logo.png">
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-   <link rel="stylesheet" href="asset/style.css">
- 
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recettes - Les Petits Plats</title>
+    <!-- Link to Bootstrap CSS -->
+    <link rel="icon" type="image/png" href="asset/images/logo.png">
+    <link rel="stylesheet" href="asset/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+      .input-group-append button {
+        margin-left: -1px;
+      }
+    </style>
+  </head>
 <body>
   <div class="header">
     <div class="header-logo">
@@ -28,32 +31,64 @@
 	
     </div>
   </div>
-
+  
   <div class="container">
     <div class="select-container">
+      
       <div class="form-group">
-        <select class="form-control ingredient-select">
-		<option>Ingrédient</option>
-          <option>Option 1</option>
-          <option>Option 2</option>
-          <option>Option 3</option>
-        </select>
+        <div class="input-group mt-3">
+            <input type="text" class="form-control selectElmt" placeholder="Ingrédients" id="searchIngredient">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" onclick="toggleDropdownList('ingredientDropdownList')">
+                    <i class="fas fa-chevron-down"></i> <!-- Icône de flèche vers le bas -->
+                </button>
+            </div>
+          </div>
+  
+          <!-- Liste déroulante pour les ingrédients -->
+          <ul class="list-group mt-2" id="ingredientDropdownList" style="display: none;">
+            <li class="list-group-item" onclick="selectIngredient('Ingrédient 1')">Ingrédient 1</li>
+            <li class="list-group-item" onclick="selectIngredient('Ingrédient 2')">Ingrédient 2</li>
+            <!-- Ajoutez ici vos autres options d'ingrédients -->
+          </ul>
       </div>
       <div class="form-group">
-        <select class="form-control appareil-select">
-		<option >Appareils</option>
-          <option>Option 1</option>
-          <option>Option 2</option>
-          <option>Option 3</option>
-        </select>
+        <div class="input-group mt-3">
+            <input type="text" class="form-control selectElmt" placeholder="Appareils" id="searchAppareilInput">
+          
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" onclick="toggleDropdownList('appareilDropdownList')">
+                    <i class="fas fa-chevron-down"></i> <!-- Icône de flèche vers le bas -->
+                </button>
+            </div>
+            
+          </div>
+  
+          <!-- Liste déroulante pour les appareils -->
+          <ul class="list-group mt-2" id="appareilDropdownList" style="display: none;">
+            <li class="list-group-item" onclick="selectAppareil('Appareil 1')">Appareil 1</li>
+            <li class="list-group-item" onclick="selectAppareil('Appareil 2')">Appareil 2</li>
+            <!-- Ajoutez ici vos autres options d'appareils -->
+          </ul>
       </div>
       <div class="form-group">
-        <select class="form-control ustensile-select">
-		<option >Ustensiles</option>
-          <option>Option 1</option>
-          <option>Option 2</option>
-          <option>Option 3</option>
-        </select>
+       
+          <div class="input-group mt-3">
+            <input type="text" class="form-control selectElmt" placeholder="Ustensiles" id="searchUstensileInput">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" onclick="toggleDropdownList('ustensileDropdownList')">
+                    <i class="fas fa-chevron-down"></i> <!-- Icône de flèche vers le bas -->
+                </button>
+            </div>
+          </div>
+  
+          <!-- Liste déroulante pour les ustensiles -->
+          <ul class="list-group mt-2" id="ustensileDropdownList" style="display: none;">
+            <li class="list-group-item" onclick="selectUstensile('Ustensile 1')">Ustensile 1</li>
+            <li class="list-group-item" onclick="selectUstensile('Ustensile 2')">Ustensile 2</li>
+            <!-- Ajoutez ici vos autres options d'ustensiles -->
+          </ul>
+      
       </div>
       <div class="recette-count">
         
@@ -72,12 +107,63 @@
     </div>
 
   </div>
+  <script>
+    // Fonction pour afficher ou masquer la liste déroulante
+    function toggleDropdownList(id) {
+        const dropdownList = document.getElementById(id);
+        dropdownList.style.display = dropdownList.style.display === "block" ? "none" : "block";
+    }
 
+
+  </script>
   <!-- Link to Bootstrap JS and jQuery !-->
   <script src="js/index.js" type="module"></script> 
- <!-- <script src="js/test.js" type="module"></script> -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // Fonction pour filtrer la liste d'ingrédients en fonction de la saisie de l'utilisateur
+    document.getElementById("searchIngredient").addEventListener("input", function() {
+      var searchInput = this.value.toLowerCase();
+      var ingredientList = document.getElementById("ingredientDropdownList").getElementsByTagName("li");
+  
+      for (var i = 0; i < ingredientList.length; i++) {
+        var ingredientText = ingredientList[i].innerText.toLowerCase();
+        if (ingredientText.includes(searchInput)) {
+          ingredientList[i].style.display = "block";
+        } else {
+          ingredientList[i].style.display = "none";
+        }
+      }
+    });
+// Fonction pour filtrer la liste d'appareils en fonction de la saisie de l'utilisateur
+document.querySelector("#searchAppareilInput").addEventListener("input", function() {
+  var searchInput = this.value.toLowerCase();
+  var appareilList = document.querySelectorAll("#appareilDropdownList li");
+
+  for (var i = 0; i < appareilList.length; i++) {
+    var appareilText = appareilList[i].innerText.toLowerCase();
+    if (appareilText.includes(searchInput)) {
+      appareilList[i].style.display = "block";
+    } else {
+      appareilList[i].style.display = "none";
+    }
+  }
+});
+
+// Fonction pour filtrer la liste d'ustensiles en fonction de la saisie de l'utilisateur
+document.querySelector("#searchUstensileInput").addEventListener("input", function() {
+  var searchInput = this.value.toLowerCase();
+  var ustensileList = document.querySelectorAll("#ustensileDropdownList li");
+
+  for (var i = 0; i < ustensileList.length; i++) {
+    var ustensileText = ustensileList[i].innerText.toLowerCase();
+    if (ustensileText.includes(searchInput)) {
+      ustensileList[i].style.display = "block";
+    } else {
+      ustensileList[i].style.display = "none";
+    }
+  }
+});
+
+  </script>
+  
 </body>
 </html>

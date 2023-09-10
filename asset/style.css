@@ -36,6 +36,7 @@
      flex: 1;
      border: none;
      padding: 10px;
+     color:black;
    }
    .search-button {
      background-color: black;
@@ -156,4 +157,26 @@ font-weight: bold;
   font-size: 18px;
   text-align: center;
   margin-top: 10px;
+}
+/* Styles pour la liste déroulante d'ingrédients */
+#ingredientDropdownList {
+  position: absolute;
+  z-index: 1000; /* Assurez-vous que la liste déroulante est au-dessus des autres éléments */
+  background-color: white;
+  border: 1px solid #ddd;
+
+  margin-top: 10px; /* Espace entre la liste et les éléments adjacents */
+}
+
+/* Styles pour la liste déroulante d'appareils */
+#appareilDropdownList, #ustensileDropdownList {
+  position: absolute;
+  z-index: 1000; /* Assurez-vous que la liste déroulante est au-dessus des autres éléments */
+  background-color: white;
+  border: 1px solid #ddd;
+  
+  margin-top: 10px; /* Espace entre la liste et les éléments adjacents */
+}
+.list-group-item {
+  border:none !important ;
 }
