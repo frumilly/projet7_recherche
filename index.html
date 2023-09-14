@@ -121,7 +121,7 @@
   <script>
     // Fonction pour filtrer la liste d'ingrédients en fonction de la saisie de l'utilisateur
     document.getElementById("searchIngredient").addEventListener("input", function() {
-      var searchInput = this.value.toLowerCase();
+      var searchInput = this.value.toLowerCase().trim();
       var ingredientList = document.getElementById("ingredientDropdownList").getElementsByTagName("li");
   
       for (var i = 0; i < ingredientList.length; i++) {
@@ -135,7 +135,7 @@
     });
 // Fonction pour filtrer la liste d'appareils en fonction de la saisie de l'utilisateur
 document.querySelector("#searchAppareilInput").addEventListener("input", function() {
-  var searchInput = this.value.toLowerCase();
+  var searchInput = this.value.toLowerCase().trim();
   var appareilList = document.querySelectorAll("#appareilDropdownList li");
 
   for (var i = 0; i < appareilList.length; i++) {
@@ -150,7 +150,7 @@ document.querySelector("#searchAppareilInput").addEventListener("input", functio
 
 // Fonction pour filtrer la liste d'ustensiles en fonction de la saisie de l'utilisateur
 document.querySelector("#searchUstensileInput").addEventListener("input", function() {
-  var searchInput = this.value.toLowerCase();
+  var searchInput = this.value.toLowerCase().trim();
   var ustensileList = document.querySelectorAll("#ustensileDropdownList li");
 
   for (var i = 0; i < ustensileList.length; i++) {
