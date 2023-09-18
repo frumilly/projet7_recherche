@@ -56,7 +56,9 @@ function init() {
                     if (selectedIngredient !== 'Ingrédient') {
                         tags.push(selectedIngredient);
                         selection(recipes, searchValue, tags, selectedIngredient);
-                        console.log("oui");
+                        const searchIngredientInput = document.getElementById('searchIngredient');
+                        searchIngredientInput.value = ""; // Cette ligne vide le champ d'entrée
+                        console.log(searchIngredientInput);
 
 
                     }
@@ -69,6 +71,8 @@ function init() {
                     if (selectedAppareil !== 'Appareil') {
                         tags.push(selectedAppareil);
                         selection(recipes, searchValue, tags, appareilSelect);
+                        const searchAppareilInput = document.getElementById('searchAppareilInput');
+                        searchAppareilInput.value = ""; // Cette ligne vide le champ d'entrée
                     }
                 });
             });
@@ -79,6 +83,8 @@ function init() {
                     if (selectedUstensile !== 'Ustensile') {
                         tags.push(selectedUstensile);
                         selection(recipes, searchValue, tags, ustensileSelect);
+                        const searchUstensileInput = document.getElementById('searchUstensileInput');
+                        searchUstensileInput.value = "";
                     }
                 });
             });
@@ -97,10 +103,12 @@ function init() {
     ingredientListItems.forEach((listItem) => {
         listItem.addEventListener('click', function () {
             const selectedIngredient = listItem.textContent;
+            console.log("ici");
             if (selectedIngredient !== 'Ingrédient') {
                 tags.push(selectedIngredient);
                 selection(recipes, searchValue, tags, selectedIngredient);
-                console.log("oui");
+                const searchIngredientInput = document.getElementById('searchIngredient');
+                searchIngredientInput.value = ""; // Cette ligne vide le champ d'entrée
 
 
             }
@@ -114,6 +122,8 @@ function init() {
             if (selectedAppareil !== 'Appareil') {
                 tags.push(selectedAppareil);
                 selection(recipes, searchValue, tags, appareilSelect);
+                const searchAppareilInput = document.getElementById('searchAppareilInput');
+                        searchAppareilInput.value = "";
             }
         });
     });
@@ -125,6 +135,8 @@ function init() {
             if (selectedUstensile !== 'Ustensile') {
                 tags.push(selectedUstensile);
                 selection(recipes, searchValue, tags, ustensileSelect);
+                const searchUstensileInput = document.getElementById('searchUstensileInput');
+                searchUstensileInput.value = "";
             }
         });
     });
@@ -149,7 +161,8 @@ function init() {
                     if (selectedIngredient !== 'Ingrédient') {
                         tags.push(selectedIngredient);
                         selection(recipes, searchValue, tags, selectedIngredient);
-                        console.log("oui");
+                        const searchIngredientInput = document.getElementById('searchIngredient');
+                        searchIngredientInput.value = ""; // Cette ligne vide le champ d'entrée
 
 
                     }
@@ -162,6 +175,8 @@ function init() {
                     if (selectedAppareil !== 'Appareil') {
                         tags.push(selectedAppareil);
                         selection(recipes, searchValue, tags, appareilSelect);
+                        const searchAppareilInput = document.getElementById('searchAppareilInput');
+                        searchAppareilInput.value = "";
                     }
                 });
             });
@@ -172,6 +187,8 @@ function init() {
                     if (selectedUstensile !== 'Ustensile') {
                         tags.push(selectedUstensile);
                         selection(recipes, searchValue, tags, ustensileSelect);
+                        const searchUstensileInput = document.getElementById('searchUstensileInput');
+                        searchUstensileInput.value = "";
                     }
                 });
             });
@@ -195,7 +212,8 @@ function selection(recipes, searchValue, tags, typeS) {
             if (selectedIngredient !== 'Ingrédient') {
                 tags.push(selectedIngredient);
                 selection(recipes, searchValue, tags, selectedIngredient);
-                console.log("oui");
+                const searchIngredientInput = document.getElementById('searchIngredient');
+                searchIngredientInput.value = ""; // Cette ligne vide le champ d'entrée
 
 
             }
@@ -208,6 +226,8 @@ function selection(recipes, searchValue, tags, typeS) {
             if (selectedAppareil !== 'Appareil') {
                 tags.push(selectedAppareil);
                 selection(recipes, searchValue, tags, appareilSelect);
+                const searchAppareilInput = document.getElementById('searchAppareilInput');
+                        searchAppareilInput.value = "";
             }
         });
     });
@@ -218,6 +238,8 @@ function selection(recipes, searchValue, tags, typeS) {
             if (selectedUstensile !== 'Ustensile') {
                 tags.push(selectedUstensile);
                 selection(recipes, searchValue, tags, ustensileSelect);
+                const searchUstensileInput = document.getElementById('searchUstensileInput');
+                searchUstensileInput.value = "";
             }
         });
     });
