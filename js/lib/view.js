@@ -1,11 +1,10 @@
 // faire l'affichage
 // Fonction pour générer le code HTML d'une carte de recette
 // Déclarez et initialisez les sélecteurs
-const ingredientSelect = document.querySelector('.ingredient-select');
-const appareilSelect = document.querySelector('.appareil-select');
-const ustensileSelect = document.querySelector('.ustensile-select');
 function sortAlphabetically(arr) {
+  /* eslint-disable */
   return arr.map((item) => item.charAt(0).toUpperCase() + item.slice(1)) // Capitaliser la première lettre
+  /* eslint-disable */
     .sort((a, b) => a.localeCompare(b));
 }
 function escapeUserInput(input) {
