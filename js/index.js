@@ -3,7 +3,7 @@
 // apelle le view.js pour faire le display
 // Met à jour les select box selon le choix des tags , efface et actualise
 
-import * as Search from './lib/searchv2.js';
+import * as Search from './lib/search.js';
 import * as Display from './lib/view.js';
 import { recipes } from '../data/recipes.js';
 
