@@ -4,6 +4,8 @@
   const ingredientSelect = document.querySelector('.ingredient-select');
   const appareilSelect = document.querySelector('.appareil-select');
   const ustensileSelect = document.querySelector('.ustensile-select');
+
+
   function sortAlphabetically(arr) {
     return arr.map(item => item.charAt(0).toUpperCase() + item.slice(1)) // Capitaliser la première lettre
               .sort((a, b) => a.localeCompare(b));

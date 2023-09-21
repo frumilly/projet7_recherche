@@ -34,7 +34,21 @@ function updateTags() {
 function init() {
     const searchInput = document.querySelector('.search-input');
     let searchValue = searchInput.value.trim();
+    const toggleButton = document.getElementById("bustensile");
 
+    toggleButton.addEventListener("click", function () {
+        toggleDropdownList("ustensileDropdownList");
+    });
+    const toggleButtonIng = document.getElementById("bing");
+
+    toggleButtonIng.addEventListener("click", function () {
+        toggleDropdownList("ingredientDropdownList");
+    });
+    const toggleButtonApp = document.getElementById("bapp");
+
+    toggleButtonApp.addEventListener("click", function () {
+        toggleDropdownList("appareilDropdownList");
+    });
     const filterRecipes = Search.filter(recipes, searchValue, tags);
     Display.displayRecipes(filterRecipes, recipeCardContainer);
     updateRecipeCount(filterRecipes.length);
@@ -245,4 +259,56 @@ function selection(recipes, searchValue, tags, typeS) {
     });
 
 }
+// Fonction pour filtrer la liste d'ingrédients en fonction de la saisie de l'utilisateur
+document.getElementById("searchIngredient").addEventListener("input", function() {
+  var searchInput = this.value.toLowerCase().trim();
+  var ingredientList = document.getElementById("ingredientDropdownList").getElementsByTagName("li");
+
+  for (var i = 0; i < ingredientList.length; i++) {
+    var ingredientText = ingredientList[i].innerText.toLowerCase();
+    if (ingredientText.includes(searchInput)) {
+      ingredientList[i].style.display = "block";
+    } else {
+      ingredientList[i].style.display = "none";
+    }
+  }
+});
+// Fonction pour filtrer la liste d'appareils en fonction de la saisie de l'utilisateur
+document.querySelector("#searchAppareilInput").addEventListener("input", function() {
+var searchInput = this.value.toLowerCase().trim();
+var appareilList = document.querySelectorAll("#appareilDropdownList li");
+
+for (var i = 0; i < appareilList.length; i++) {
+var appareilText = appareilList[i].innerText.toLowerCase();
+if (appareilText.includes(searchInput)) {
+  appareilList[i].style.display = "block";
+} else {
+  appareilList[i].style.display = "none";
+}
+}
+});
+
+// Fonction pour filtrer la liste d'ustensiles en fonction de la saisie de l'utilisateur
+document.querySelector("#searchUstensileInput").addEventListener("input", function() {
+var searchInput = this.value.toLowerCase().trim();
+var ustensileList = document.querySelectorAll("#ustensileDropdownList li");
+
+for (var i = 0; i < ustensileList.length; i++) {
+var ustensileText = ustensileList[i].innerText.toLowerCase();
+if (ustensileText.includes(searchInput)) {
+  ustensileList[i].style.display = "block";
+} else {
+  ustensileList[i].style.display = "none";
+}
+}
+});
+  // Fonction pour afficher ou masquer la liste déroulante
+ function toggleDropdownList(id) {
+  const dropdownList = document.getElementById(id);
+  dropdownList.style.display = dropdownList.style.display === "block" ? "none" : "block";
+}
+export {
+  toggleDropdownList
+};
+
 init();

@@ -180,3 +180,6 @@ font-weight: bold;
 .list-group-item {
   border:none !important ;
 }
+.input-group-append button {
+  margin-left: -1px;
+}
