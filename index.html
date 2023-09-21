@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="asset/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-      .input-group-append button {
-        margin-left: -1px;
-      }
-    </style>
+     <!-- Link to Bootstrap JS and jQuery !-->
+  <script src="js/index.js" type="module"></script> 
+  <script type="module">
+     import { toggleDropdownList } from './js/index.js';
+</script>
   </head>
 <body>
   <div class="header">
@@ -39,7 +39,7 @@
         <div class="input-group mt-3">
             <input type="text" class="form-control selectElmt" placeholder="Ingrédients" id="searchIngredient">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" onclick="toggleDropdownList('ingredientDropdownList')">
+                <button class="btn btn-outline-secondary" type="button" id="bing" >
                     <i class="fas fa-chevron-down"></i> <!-- Icône de flèche vers le bas -->
                 </button>
             </div>
@@ -57,7 +57,7 @@
             <input type="text" class="form-control selectElmt" placeholder="Appareils" id="searchAppareilInput">
           
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" onclick="toggleDropdownList('appareilDropdownList')">
+                <button class="btn btn-outline-secondary" type="button" id="bapp">
                     <i class="fas fa-chevron-down"></i> <!-- Icône de flèche vers le bas -->
                 </button>
             </div>
@@ -76,7 +76,7 @@
           <div class="input-group mt-3">
             <input type="text" class="form-control selectElmt" placeholder="Ustensiles" id="searchUstensileInput">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" onclick="toggleDropdownList('ustensileDropdownList')">
+                <button class="btn btn-outline-secondary" type="button" id="bustensile" >
                     <i class="fas fa-chevron-down"></i> <!-- Icône de flèche vers le bas -->
                 </button>
             </div>
@@ -107,63 +107,9 @@
     </div>
 
   </div>
-  <script>
-    // Fonction pour afficher ou masquer la liste déroulante
-    function toggleDropdownList(id) {
-        const dropdownList = document.getElementById(id);
-        dropdownList.style.display = dropdownList.style.display === "block" ? "none" : "block";
-    }
+ 
 
-
-  </script>
-  <!-- Link to Bootstrap JS and jQuery !-->
-  <script src="js/index.js" type="module"></script> 
-  <script>
-    // Fonction pour filtrer la liste d'ingrédients en fonction de la saisie de l'utilisateur
-    document.getElementById("searchIngredient").addEventListener("input", function() {
-      var searchInput = this.value.toLowerCase().trim();
-      var ingredientList = document.getElementById("ingredientDropdownList").getElementsByTagName("li");
-  
-      for (var i = 0; i < ingredientList.length; i++) {
-        var ingredientText = ingredientList[i].innerText.toLowerCase();
-        if (ingredientText.includes(searchInput)) {
-          ingredientList[i].style.display = "block";
-        } else {
-          ingredientList[i].style.display = "none";
-        }
-      }
-    });
-// Fonction pour filtrer la liste d'appareils en fonction de la saisie de l'utilisateur
-document.querySelector("#searchAppareilInput").addEventListener("input", function() {
-  var searchInput = this.value.toLowerCase().trim();
-  var appareilList = document.querySelectorAll("#appareilDropdownList li");
-
-  for (var i = 0; i < appareilList.length; i++) {
-    var appareilText = appareilList[i].innerText.toLowerCase();
-    if (appareilText.includes(searchInput)) {
-      appareilList[i].style.display = "block";
-    } else {
-      appareilList[i].style.display = "none";
-    }
-  }
-});
-
-// Fonction pour filtrer la liste d'ustensiles en fonction de la saisie de l'utilisateur
-document.querySelector("#searchUstensileInput").addEventListener("input", function() {
-  var searchInput = this.value.toLowerCase().trim();
-  var ustensileList = document.querySelectorAll("#ustensileDropdownList li");
-
-  for (var i = 0; i < ustensileList.length; i++) {
-    var ustensileText = ustensileList[i].innerText.toLowerCase();
-    if (ustensileText.includes(searchInput)) {
-      ustensileList[i].style.display = "block";
-    } else {
-      ustensileList[i].style.display = "none";
-    }
-  }
-});
-
-  </script>
+ 
   
 </body>
 </html>
